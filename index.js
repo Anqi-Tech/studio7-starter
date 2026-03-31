@@ -84,6 +84,9 @@ export function addItem(data = { done: false, title: "" }) {
  */
 export function clearCompleted() {
     // TODO implement this (see step 4)
+    dom.tasksList
+        .querySelectorAll("li:has(.done:checked) .delete")
+        .forEach((btn) => btn.click());
 }
 
 /**
