@@ -36,6 +36,14 @@ dom.tasksList.addEventListener("keydown", (e) => {
         li.querySelector(".delete").click();
         focusTask(previousSibling ?? dom.tasksList.firstElementChild);
         e.preventDefault(); // prevent data corruption
+    } else if (e.key === "ArrowUp") {
+        const previousSibling = li.previousElementSibling;
+        focusTask(previousSibling);
+        e.preventDefault();
+    } else if (e.key === "ArrowDown") {
+        const nextSibling = li.nextElementSibling;
+        focusTask(nextSibling);
+        e.preventDefault();
     }
 });
 
@@ -60,11 +68,11 @@ export function addItem(data = { done: false, title: "" }) {
     done.addEventListener("change", updateCounts);
 
     element.querySelector(".delete").addEventListener("click", () => {
-        const prev = element.previousElementSibling;
-        const next = element.nextElementSibling;
+        const prevElement = element.previousElementSibling;
+        const nextElement = element.nextElementSibling;
         element.remove();
         updateCounts();
-        focusTask(prev ?? next);
+        focusTask(prevElement ?? nextElement);
     });
 
     updateCounts();
